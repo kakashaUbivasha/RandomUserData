@@ -15,7 +15,7 @@ function TableWithPagination({ seed, probability,fakerLang, setProbability}) {
         setLoading(true);
         try {
             console.log(page, seed, probability)
-            const response = await axios.put(`http://localhost:3000/users?seed=${seed}&page=${page}&probability=${probability}&loc=${fakerLang}&count=${count}`);
+            const response = await axios.put(`https://backforrud.onrender.com/users?seed=${seed}&page=${page}&probability=${probability}&loc=${fakerLang}&count=${count}`);
             console.log(response.data)
             setData(prevData => [...prevData, ...response.data]);
         } catch (error) {
@@ -59,16 +59,6 @@ function TableWithPagination({ seed, probability,fakerLang, setProbability}) {
             console.log(`11lolo`)
         }
     };
-    function handleCSVGenerate(){
-        axios.post(`http://localhost:3000/convert-to-csv?data=${data}`)
-            .then(response => {
-                console.log('CSV file:', response.data);
-                // Здесь можно обработать CSV файл
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -79,7 +69,6 @@ function TableWithPagination({ seed, probability,fakerLang, setProbability}) {
     }, [page]);
     return (
         <div>
-            <button onClick={handleCSVGenerate} >opauhdfi</button>
             <UserInfo key={data.id} data={data}/>
             {loading && <div className="text-center">Loading...</div>}
         </div>
